@@ -1,0 +1,5 @@
+package com.dbms.sms.controller;
+
+public class StudentController {
+
+}

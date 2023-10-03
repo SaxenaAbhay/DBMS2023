@@ -1,0 +1,6 @@
+package com.dbms.sms.repository;
+
+import org.springframework.*;
+public interface StudentRepository extends JpaRepository<Student, Long> {
+
+}
