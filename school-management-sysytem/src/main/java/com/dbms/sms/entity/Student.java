@@ -1,16 +1,17 @@
 package com.dbms.sms.entity;
 
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="students")
 public class Student {
-	
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="roll")
-	private Long roll;
+	@Column(name="scholar_id")
+	private Long scholarId;
 	
 	@Column(name="first_name",nullable=false)
 	private String firstName;
@@ -24,46 +25,17 @@ public class Student {
 	@Column(name="dob")
 	private String dob;
 	
-	public String getDob() {
-		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	public Student() {
-		
-	}
-	public Long getRoll() {
-		return roll;
-	}
-	public void setId(Long roll) {
-		this.roll = roll;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Student(Long roll,String firstName, String lastName, String email,String dob) {
-		super();
-		this.roll=roll;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.dob=dob;
-	}
+	@Column(name="contact")
+	private String contact;
+	
+	@Column(name="parent_name")
+	private String parentName;
+	
+	@ManyToOne
+	@JoinColumn(name = "class", referencedColumnName = "class_id")
+	private Class classroom;
+	
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+	private List<Score> scoreList;
 	
 }

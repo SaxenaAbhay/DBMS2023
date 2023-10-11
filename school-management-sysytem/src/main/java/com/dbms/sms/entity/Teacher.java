@@ -1,5 +1,7 @@
 package com.dbms.sms.entity;
 
+import com.dbms.sms.entity.Class;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class Teacher {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name="emp_id")
 	private int employeeId;
 	
 	@Column(name="first_name",nullable=false)
@@ -25,62 +28,13 @@ public class Teacher {
 	@Column(name="contact")
 	private String contact;
 	
+	@ManyToOne
+	@JoinColumn(name = "subject_id", referencedColumnName = "sub_id")
+	Subject subId;
 	
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getAddress() {
-		return address;
-	}
+	@Column(name="salary")
+	private int salary;
 	
-
-	public Teacher() {
-		
-	}
 	
-
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Teacher(String firstName, String lastName, String email,String address,String contact) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.address=address;
-		this.contact=contact;
-	}
 	
 }
