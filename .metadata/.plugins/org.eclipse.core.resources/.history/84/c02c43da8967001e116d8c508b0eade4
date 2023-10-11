@@ -1,0 +1,17 @@
+package com.dbms.sms.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="class")
+public class Class {
+	@EmbeddedId classId class_id;
+}
+class classId{
+	
+	@Column(name="standard")
+	private int standard;
+	
+	@Column(name="section")
+	private char section;
+}

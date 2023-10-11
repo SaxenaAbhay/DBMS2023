@@ -9,16 +9,17 @@ import jakarta.persistence.*;
 @Table(name="scores")
 public class Score {
 	
-	@EmbeddedId scoreId id; 
-	
-	@Column(name="score")
-	private Long score;
+	    @Id
+	    Long id;
+
+	    @ManyToOne
+	    @JoinColumn(name = "student_id", referencedColumnName="scholar_id")
+	    Student student;
+
+	    @ManyToOne
+	    @JoinColumn(name = "exam_id",referencedColumnName="exam_id")
+	    Exam exam;
+
+	    int marks;
 }
-class scoreId{
-	
-	@Column(name="studId")
-	private int studId;
-	
-	@Column(name="subjId")
-	private int subjId;
-}
+

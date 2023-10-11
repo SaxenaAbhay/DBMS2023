@@ -1,5 +1,0 @@
-package com.dbms.sms.repository;
-
-public interface StudentRepository {
-
-}

@@ -6,5 +6,4 @@ import com.dbms.sms.entity.Student;
 
 public interface StudentService {
 	List<Student> getAllStudents();
-	
 }

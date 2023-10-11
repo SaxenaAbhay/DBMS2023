@@ -1,5 +1,7 @@
 package com.dbms.sms.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,20 +9,15 @@ import jakarta.persistence.*;
 public class Subject {
 	
 	@Id
-	@Column(name="Id")
-	private int subjectId;
+	@Column(name="sub_id")
+	private int subId;
 	
-	@Column(name="name")
-	private String subjectName;
+	@Column(name="sub_name")
+	private String sub_name; 
 	
-	@Column(name="credits")
-	private int credits;
+	@OneToMany(mappedBy = "subId", cascade = CascadeType.ALL)
+    private List<Teacher> teacherList;
 	
-	@Column(name="incharge")
-	private int inchargeId;
-	
-	@Column(name="class")
-	private int classId;
-	
-	
+	@OneToMany(mappedBy = "subId", cascade = CascadeType.ALL)
+    private List<Exam> examList;
 }
