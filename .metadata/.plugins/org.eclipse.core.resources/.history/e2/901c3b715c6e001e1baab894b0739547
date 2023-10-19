@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="My Academia">
+        <meta name="keywords" content="school website, responsive">
+        <meta name="author" content="Yashwini Bansal">
+    
+        <!-- Website Title -->
+        <title>My Academia</title>
+        
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,700,700i&display=swap" rel="stylesheet">
+    
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/fontawesome-all.css" rel="stylesheet">
+        <link href="css/swiper.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+    
+        <link rel="icon" href="images/logo2.jpg">
+    
+        <!-- Scripts -->
+        <script src="js/jquery.min.js" defer></script>
+        <script src="js/popper.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="js/jquery.easing.min.js" defer></script>
+        <script src="js/swiper.min.js" defer></script>
+        <script src="js/validator.min.js" defer></script>
+        <script src="js/scripts.js" defer></script>
+    </head>
+<body>
+    <div>
+        <h2>Login</h2>
+        <form action="your_login_script.php" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
