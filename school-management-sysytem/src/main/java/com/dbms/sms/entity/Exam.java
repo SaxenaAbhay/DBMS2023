@@ -28,10 +28,75 @@ public class Exam {
 	@Column(name="total_marks")
 	private int totalMarks;
 	
-	 @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
+	
+	 public int getExamId() {
+		return examId;
+	}
+
+	public void setExamId(int examId) {
+		this.examId = examId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public int getSlot() {
+		return slot;
+	}
+
+	public void setSlot(int slot) {
+		this.slot = slot;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getStandard() {
+		return standard;
+	}
+
+	public void setStandard(int standard) {
+		this.standard = standard;
+	}
+
+	public int getTotalMarks() {
+		return totalMarks;
+	}
+
+	public void setTotalMarks(int totalMarks) {
+		this.totalMarks = totalMarks;
+	}
+
+	public List<Score> getScoreList() {
+		return scoreList;
+	}
+
+	public void setScoreList(List<Score> scoreList) {
+		this.scoreList = scoreList;
+	}
+
+	public Subject getSubId() {
+		return subId;
+	}
+
+	public void setSubId(Subject subId) {
+		this.subId = subId;
+	}
+
+	@OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
 	 private List<Score> scoreList;
 	 
 	@ManyToOne
 	@JoinColumn(name = "subject_id", referencedColumnName = "sub_id")
-	Subject subId;
+	private Subject subId;
 }
