@@ -1,0 +1,26 @@
+package com.dbms.sms.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.dbms.sms.service.StudentService;
+
+@Controller
+public class teachercontroller {
+	
+	private teacherService teacherService;
+
+	public teachercontroller(teacherService studentService) {
+		super();
+		this.teacherService = teacherService;
+	}
+	
+	//handler method to handle list students and return mode and view
+	
+	@GetMapping("/teachers")
+	public String listStudetns(Model model) {
+		model.addAttribute("teachers", studentService.getAllStudents());
+		return "teachers";
+	}
+}

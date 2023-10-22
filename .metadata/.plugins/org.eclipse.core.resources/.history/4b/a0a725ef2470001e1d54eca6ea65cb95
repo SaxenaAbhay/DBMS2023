@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">Create Student</div>
+        <form class="form" method="post" th:action="@{/students}" th:object="${student}">
+            <div class="inputfield">
+                <label>First Name</label>
+                <input name="firstname" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Last Name</label>
+                <input name="lastname" type="text"  class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>ParentName</label>
+                <input name="parentName" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Contact</label>
+                <input name="contact" type="text" class="input" required >
+            </div>
+            
+            <div class="inputfield">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required >
+              </div>
+            <div class="inputfield">
+                <label>D.O.B.</label>
+                <input name="dob" type="date" class="input" required >
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="SUBMIT" class="btn">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

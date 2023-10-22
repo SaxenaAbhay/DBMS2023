@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Academia">
+    <meta name="keywords" content="school website, responsive">
+    <meta name="author" content="Yashwini Bansal">
+
+
+    <title>My Academia</title>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/fontawesome-all.css}" />
+    <link rel="stylesheet" th:href="@{/css/swiper.css}" />
+
+
+
+    <link rel="icon" th:href="@{/images/logo2.jpg}" >
+
+    <script th:src="@{/js/jquery.min.js}" ></script>
+    <script th:src="@{/js/popper.min.js}" defer></script>
+    <script th:src="@{/js/bootstrap.min.js}" defer></script>
+    <script th:src="@{/js/jquery.easing.min.js}" defer></script>
+    <script th:src="@{/js/swiper.min.js}" defer></script>
+    <script th:src="@{/js/validator.min.js}" defer></script>
+    <script th:src="@{/js/scripts.js}" defer></script>
+
+
+  </head>
+    <body data-spy="scroll" data-target=".fixed-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
+    <!-- Logo -->
+    <a class="navbar-brand logo-image" href="{% url 'MyAcad-home' %}"><img th:src="@{/images/logo.jpg}"></a>
+    <a class="navbar-brand logo" href="{% url 'MyAcad-home' %}" style="text-decoration: none;"><h3>MY ACADEMIA</h3></a>
+    
+    <!-- Mobile Menu Toggle Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-awesome fas fa-bars"></span>
+        <span class="navbar-toggler-awesome fas fa-times"></span>
+    </button>
+    <!-- end of mobile menu toggle button -->
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" >MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll"  >MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{% url 'logout' %}">LOGOUT</a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'MyAcad-home' %}">HOME<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#about">ABOUT US</a>
+            </li>
+
+            <!-- Dropdown Menu -->          
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMISSIONS</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'prospectus' %}"><span class="item-text">PROSPECTUS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">POLICY</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/application}" href="#"><span class="item-text">APPLICATION FORM</span></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ACADEMICS</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"><span class="item-text">RULES AND REGULATIONS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">CBSE RESULT ANALYSIS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">CURRICULUM</span></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ACTIVITIES</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"><span class="item-text">SPORTS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">CLUBS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">INTER-SCHOOL COMPETITIONS</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">CULTURAL</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><span class="item-text">SOCIAL ACTIVITIES</span></a>
+                </div>
+            </li>
+            <!-- end of dropdown menu -->
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#contact">CONTACT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link page-scroll" th:href="@{/login}">LOGIN</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+  
+    <div th:replace="${content}"></div>
+  </body>
+</html>

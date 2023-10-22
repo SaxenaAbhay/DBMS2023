@@ -79,6 +79,52 @@ a:hover {
 	color: #555;
 	text-decoration: underline;
 }
+.box-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.box {
+  height: 130px;
+  width: 230px;
+  border-radius: 20px;
+  
+  box-shadow: 3px 3px 10px rgba(0, 30, 87, 0.751);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+.box:hover {
+  transform: scale(1.08);
+}
+ 
+.box:nth-child(1) {
+  background-color: white;
+}
+.box:nth-child(2) {
+  background-color:  white;
+}
+.box:nth-child(3) {
+  background-color:  white;
+}
+.box:nth-child(4) {
+  background-color: white;
+}
+ 
+.box img {
+  height: 50px;
+}
+.box .text {
+  color: white;
+}
+
+
 
 .btn-solid-reg {
 	display: inline-block;
@@ -1083,6 +1129,16 @@ a:hover.back-to-top {
 	margin: 50px auto;
 	margin-top: 170px;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+	padding: 30px;
+}
+
+.wrapper_2 {
+	max-width: 1000px;
+	width: 100%;
+	/*background: background#ffbd50;*/
+	margin: 20px auto;
+	margin-top: 170px;
+	/*box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);*/
 	padding: 30px;
 }
 
