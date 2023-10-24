@@ -1,5 +1,7 @@
 package com.dbms.sms.controller;
 
+import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,18 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.dbms.sms.entity.Student;
+import com.dbms.sms.repository.ClassRepository;
+import com.dbms.sms.service.ClassService;
 import com.dbms.sms.service.StudentService;
 
 @Controller
 public class StudentController {
 	
+	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ClassRepository classRepository;
 
 	public StudentController(StudentService studentService) {
 		super();
 		this.studentService = studentService;
 	}
-	
 	//handler method to handle list students and return mode and view
 	
 	@GetMapping("/students")
@@ -31,6 +37,7 @@ public class StudentController {
 
 	@GetMapping("/students/new")
 	public String createStudentForm(Model model){
+		model.addAttribute("listClass", classRepository.findAll());
 		Student student= new Student();
 		model.addAttribute("student", student);
 		return "create_student";
