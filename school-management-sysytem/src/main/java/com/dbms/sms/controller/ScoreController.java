@@ -27,7 +27,7 @@ public class ScoreController {
 	//handler method to handle list scores and return mode and view
 	
 	@GetMapping("/scores")
-	public String listStudetns(Model model) {
+	public String listScores(Model model) {
 		model.addAttribute("scores", scoreService.getAllScores());
 		return "scores";
 	}

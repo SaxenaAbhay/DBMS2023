@@ -25,6 +25,8 @@
 				<th>Email</th>
 				<th>Contact</th>
 				<th>Address</th>
+				<th>Subject</th>
+				<th>Salary</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -35,6 +37,8 @@
 				<td th:text = "${teacher.email}"></td>
 				<td th:text = "${teacher.contact}"></td>
 				<td th:text = "${teacher.address}"></td>
+				<td th:text = "${teacher.subId.sub_name}"></td>
+				<td th:text = "${teacher.salary}"></td>
 				<td>
 					<a th:href="@{/teachers/edit/{employeeId}(employeeId=${teacher.employeeId})}" class="btn btn-primary">Update</a>
 					<a th:href="@{/teachers/{employeeId}(employeeId=${teacher.employeeId})}" class="btn btn-danger">Delete</a>

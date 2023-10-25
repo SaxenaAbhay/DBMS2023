@@ -23,7 +23,7 @@ public class ClassController {
 	//handler method to handle list Classs and return mode and view
 	
 	@GetMapping("/classes")
-	public String listStudetns(Model model) {
+	public String listClasses(Model model) {
 		model.addAttribute("classes", classService.getAllClasses());
 		return "classes";
 	}

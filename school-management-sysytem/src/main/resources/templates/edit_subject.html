@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <div class="title">Update Subject</div>
+        <form class="form" method="post" th:action="@{/subjects/{subId} (subId=${subject.subId})}" th:object="${subject}" >
+            <div class="inputfield">
+                <label>Subject Id</label>
+                <input name="subId" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Subject Name</label>
+                <input name="sub_name" type="text"  class="input" required >
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="SUBMIT" class="btn">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

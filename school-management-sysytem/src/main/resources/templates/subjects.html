@@ -10,34 +10,30 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1> List exams</h1>
+			<h1> List Subjects</h1>
 		</div>
 		<div class ="row">
             <div class="col-lg-3">
-                <a th:href="@{/exams/new}" class="btn btn-primary btn-sm mb-3">Add Exam</a>
+                <a th:href="@{/subjects/new}" class="btn btn-primary btn-sm mb-3">Add subject</a>
             </div>
         </div>
 		<table class="table table-striped table-bordered" >
 		<thead class="table-dark">
 			<tr>
-				<th>Exam Id</th>
-				<th>Date</th>
-				<th>Slot_no</th>
-				<th>Standard</th>
-				<th>Total marks</th>
-				<th>Exam Type</th>
 				<th>Subject Id</th>
+				<th>subject Name</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="exam: ${exams}">
-				<td th:text = "${exam.examId}"></td>
-				<td th:text = "${exam.date}"></td>
-				<td th:text = "${exam.slot}"></td>
-				<td th:text = "${exam.standard}"></td>
-				<td th:text = "${exam.totalMarks}"></td>
-				<td th:text = "${exam.type}"></td>
-				<td th:text = "${exam.subId.subId}"></td>
+			<tr th:each="subject: ${subjects}">
+				<td th:text = "${subject.subId}"></td>
+				<td th:text = "${subject.sub_name}"></td>
+				<td>
+					<a th:href="@{/subjects/edit/{subId}(subId=${subject.subId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/subjects/{subId}(subId=${subject.subId})}" class="btn btn-danger">Delete</a>
+					
+				</td>
 			</tr>
 		</tbody>	
 		</table>

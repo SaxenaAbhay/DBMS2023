@@ -23,7 +23,7 @@ public class TeacherController {
 	//handler method to handle list teachers and return mode and view
 	
 	@GetMapping("/teachers")
-	public String listStudetns(Model model) {
+	public String listTeachers(Model model) {
 		model.addAttribute("teachers", teacherService.getAllteachers());
 		return "teachers";
 	}
@@ -55,6 +55,8 @@ public class TeacherController {
 		existingteacher.setFirstname(teacher.getFirstname());
 		existingteacher.setLastname(teacher.getLastname());
 		existingteacher.setEmail(teacher.getEmail());
+		existingteacher.setSubId(teacher.getSubId());
+		existingteacher.setSalary(teacher.getSalary());
 
         
 		teacherService.updateteacher(existingteacher);
