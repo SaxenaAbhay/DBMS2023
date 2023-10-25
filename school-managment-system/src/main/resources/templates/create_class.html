@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">Create Class</div>
+        <form class="form" method="post" th:action="@{/classes}" th:object="${class}">
+            <div class="inputfield">
+                <label>Standard</label>
+                <input name="standard" type="text"  class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Section</label>
+                <input name="section" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="SUBMIT" class="btn">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

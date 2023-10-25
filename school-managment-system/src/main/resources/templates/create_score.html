@@ -1,135 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
 <head>
-   <!-- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>-->
-    <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- SEO Meta Tags -->
-        <meta name="description" content="My Academia">
-        <meta name="keywords" content="school website, responsive">
-        <meta name="author" content="Yashwini Bansal">
-    
-        <!-- Website Title -->
-        <title>My Academia</title>
-        
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,700,700i&display=swap" rel="stylesheet">
-    
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/fontawesome-all.css" rel="stylesheet">
-        <link href="css/swiper.css" rel="stylesheet">
-        <link href="css/styles.css" rel="stylesheet">
-    
-        <link rel="icon" href="images/logo2.jpg">
-    
-        <!-- Scripts -->
-        <script src="js/jquery.min.js" defer></script>
-        <script src="js/popper.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
-        <script src="js/jquery.easing.min.js" defer></script>
-        <script src="js/swiper.min.js" defer></script>
-        <script src="js/validator.min.js" defer></script>
-        <script src="js/scripts.js" defer></script>
+    <title>Document</title>
 </head>
 <body>
-	
-	<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-
-            <!-- Logo -->
-            <a class="navbar-brand logo-image" href="./index.html"><img src="./images/logo.jpg"></a><h3>MY ACADEMIA</h3>
-            
-            <!-- Mobile Menu Toggle Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-awesome fas fa-bars"></span>
-                <span class="navbar-toggler-awesome fas fa-times"></span>
-            </button>
-            <!-- end of mobile menu toggle button -->
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="./index.html">HOME<span class="sr-only">(current)</span></a>
-                    </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link page-scroll" href="#">ABOUT US</a>
-                    </li>-->
-
-                    <!-- Dropdown Menu -->          
-                    <!--<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMISSIONS</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="./prospectus.html"><span class="item-text">PROSPECTUS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">POLICY</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="./application.html"><span class="item-text">Application Form</span></a>
-                        </div>
-                    </li>-->
-                    <!--<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ACADEMICS</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><span class="item-text">RULES AND REGULATIONS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">CBSE RESULT ANALYSIS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">CURRICULUM</span></a>
-                        </div>
-                    </li>-->
-                    <!--<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ACTIVITIES</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><span class="item-text">SPORTS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">CLUBS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">INTER-SCHOOL COMPETITIONS</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">CULTURAL</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><span class="item-text">SOCIAL ACTIVITIES</span></a>
-                        </div>
-                    </li>-->
-                    <!-- end of dropdown menu -->
-
-                    <!--<li class="nav-item">
-                        <a class="nav-link page-scroll" href="#contact">CONTACT US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#">LOGIN</a>
-                    </li>-->
-                </ul>
-            </div>
-        </nav>
     <div class="wrapper">
-        <div class="title">Feed Marks</div>
-        <form class="form" method="post" th:action="@{/students}" th:object="${student}">
-			<div class="inputfield">
-                <label>Roll No.</label>
-                <input name="rollnumber" type="text" class="input" required >
-            </div>
-            <!--<div class="inputfield">
-                <label>First Name</label>
-                <input name="firstname" type="text" class="input" required >
+        <div class="title">Create Score</div>
+        <form class="form" method="post" th:action="@{/scores}" th:object="${score}">
+            <div class="inputfield">
+                <label>Score Id</label>
+                <input name="id" type="text" class="input" required >
             </div>
             <div class="inputfield">
-                <label>Last Name</label>
-                <input name="lastname" type="text"  class="input" required >
-            </div>-->
-            <div class = "inputfield">
-                <label>Exam ID</label>
-                <input name="examid" type="text"  class="input" required >
+                <label>Student Id</label>
+                <input name="student.scholarId" type="text"  class="input" required >
             </div>
             <div class="inputfield">
-                <label>Subject ID</label>
-                <input name="lastname" type="text"  class="input" required >
+                <label>Exam </label>
+                <input name="exam.examId" type="text" class="input" required >
             </div>
             <div class="inputfield">
                 <label>Marks</label>
-                <input name="lastname" type="text"  class="input" required >
+                <input name="marks" type="text" class="input" required >
             </div>
-    
             <div class="inputfield">
                 <input type="submit" value="SUBMIT" class="btn">
             </div>

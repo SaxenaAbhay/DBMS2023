@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="container"><br><br><h4>YOUR PATH TO EXCELLENCE</h4></div>
+            
+            <!-- Image Slider -->
+            <div class="outer-container">
+                <div class="slider-container">
+                    <div class="swiper-container image-slider-1">
+                        <div class="swiper-wrapper">
+                            
+                            <!-- Slide -->
+                            <div class="swiper-slide" >
+                                <img class="img-fluid" th:src="@{/images/details-slide-1.jpg}" alt="alternative">
+                            </div>
+                            <!-- end of slide -->
+
+                            <!-- Slide -->
+                            <div class="swiper-slide">
+                                <img class="img-fluid" th:src="@{/images/details-slide-2.jpg}" alt="alternative">
+                            </div>
+                            <!-- end of slide -->
+
+                            <!-- Slide -->
+                            <div class="swiper-slide">
+                                <img class="img-fluid" th:src="@{/images/details-slide-3.jpg}" alt="alternative">
+                            </div>
+                            <!-- end of slide -->
+
+                        </div> <!-- end of swiper-wrapper -->
+                        
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <!-- end of add arrows -->
+                        
+                    </div> <!-- end of swiper-container -->
+                </div> <!-- end of slider-container -->
+            </div> <!-- end of outer-container -->
+            <!-- end of image slider -->
+
+        </header> <!-- end of header -->
+        <!-- end of header -->
+
+        <!-- About -->
+        <div id="about" class="basic-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h2>ABOUT US</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Porttitor leo a diam sollicitudin tempor. Risus sed vulputate odio ut. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Sit amet purus gravida quis blandit turpis.</p>
+                            <a class="btn-solid-lg page-scroll" href="#">KNOW MORE</a>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-5 -->
+        <!-- end of date -->
+
+        <!-- Description -->
+        <div id="description" class="basic-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>OUR OBJECTIVES</h2>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled li-space-lg first">
+                            <li class="media">
+                                <i class="bullet">1</i>
+                                <div class="media-body"><h4>To provide quality teaching-learning process</h4></div>
+                            </li>
+                            <li class="media">
+                                <i class="bullet">2</i>
+                                <div class="media-body"><h4>To create a just society</h4></div>
+                            </li>
+                        </ul>
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled li-space-lg second">
+                            <li class="media">
+                                <i class="bullet">3</i>
+                                <div class="media-body"><h4>To promote human values and character formation</h4></div>
+                            </li>
+                            <li class="media">
+                                <i class="bullet">4</i>
+                                <div class="media-body"><h4>To work towards environmental protection and conservation</h4></div>
+                            </li>
+                        </ul>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-2 -->
+        <!-- end of description -->
+        
+        <!-- Instructor -->
+        <div id="instructor" class="basic-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="img-fluid" th:src="@{images/instructor.jpg}" alt="alternative">
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h2>Principal's Message</h2>
+                            <p>Sed elementum tempus egestas sed sed risus pretium. A pellentesque sit amet porttitor eget dolor morbi. Aenean euismod elementum nisi quis eleifend. Vitae auctor eu augue ut lectus arcu bibendum at varius. Rutrum tellus pellentesque eu tincidunt. Egestas congue quisque egestas diam in arcu cursus euismod quis. Vivamus arcu felis bibendum ut tristique et egestas quis. In vitae turpis massa sed elementum.</p>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-1 -->
+        <!-- end of instructor -->
+
+        <!-- Contact -->
+        <div id="contact" class="form-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h2>Contact Details</h2>
+                            <p>For admission questions please get in touch using the contact details below. For any other queries use the form.</p>
+                            <ul class="list-unstyled li-space-lg">
+                                <li class="media">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="media-body">address</div>
+                                </li>
+                                <li class="media">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div class="media-body">mobile</div>
+                                </li>
+                                <li class="media">
+                                    <i class="fas fa-envelope"></i>
+                                    <div class="media-body"><a class="light-gray" href="mailto:#">email</a></div>
+                                </li>
+                            </ul>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+
+                        <!-- Contact Form -->
+                        <form id="contactForm" data-toggle="validator" data-focus="false">
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="cname" required>
+                                <label class="label-control" for="cname">Name</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control-input" id="cemail" required>
+                                <label class="label-control" for="cemail">Email</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control-textarea" id="cmessage" required></textarea>
+                                <label class="label-control" for="cmessage">Your message</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control-submit-button">SUBMIT</button>
+                            </div>
+                            <div class="form-message">
+                                <div id="cmsgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                        </form>
+                        <!-- end of contact form -->
+
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of form-3 -->
+        <!-- end of contact -->
+
+</body>
+</html>

@@ -15,6 +15,41 @@ public class Subject {
 	@Column(name="sub_name")
 	private String sub_name; 
 	
+
+	
+	
+	public int getSubId() {
+		return subId;
+	}
+
+	public void setSubId(int subId) {
+		this.subId = subId;
+	}
+
+	public String getSub_name() {
+		return sub_name;
+	}
+
+	public void setSub_name(String sub_name) {
+		this.sub_name = sub_name;
+	}
+
+	public List<Teacher> getTeacherList() {
+		return teacherList;
+	}
+
+	public void setTeacherList(List<Teacher> teacherList) {
+		this.teacherList = teacherList;
+	}
+
+	public List<Exam> getExamList() {
+		return examList;
+	}
+
+	public void setExamList(List<Exam> examList) {
+		this.examList = examList;
+	}
+
 	@OneToMany(mappedBy = "subId", cascade = CascadeType.ALL)
     private List<Teacher> teacherList;
 	
