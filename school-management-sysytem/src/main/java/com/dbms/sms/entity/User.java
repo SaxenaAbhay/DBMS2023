@@ -1,6 +1,13 @@
 package com.dbms.sms.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
 public class User {
+	
+	@Id
     private String username;
     private String password;
     private Boolean isAdmin;

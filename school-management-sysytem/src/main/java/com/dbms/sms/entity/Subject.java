@@ -10,7 +10,7 @@ public class Subject {
 	
 	@Id
 	@Column(name="sub_id")
-	private int subId;
+	private Long subId;
 	
 	@Column(name="sub_name")
 	private String sub_name; 
@@ -18,11 +18,11 @@ public class Subject {
 
 	
 	
-	public int getSubId() {
+	public Long getSubId() {
 		return subId;
 	}
 
-	public void setSubId(int subId) {
+	public void setSubId(Long subId) {
 		this.subId = subId;
 	}
 

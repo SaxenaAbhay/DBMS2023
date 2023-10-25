@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::body})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="title">Create teacher</div>
+	<div class="wrapper">
+		<div class="title">Create teacher</div>
         <form class="form" method="post" th:action="@{/teachers}" th:object="${teacher}">
             <div class="inputfield">
                 <label>First Name</label>
@@ -34,7 +34,10 @@
                 <input type="submit" value="SUBMIT" class="btn">
             </div>
         </form>
-    </div>
+		
+	</div>
+        
+  
 
 </body>
 </html>

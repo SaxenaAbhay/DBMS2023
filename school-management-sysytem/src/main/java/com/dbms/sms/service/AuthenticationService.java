@@ -5,7 +5,7 @@ import com.dbms.sms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class AuthenticationService {
@@ -15,6 +15,7 @@ public class AuthenticationService {
 
     public Boolean checkCredentials(String username, String password) {
         User user = users.getUser(username);
+//        if(user==null) return false;
         return user.getPassword().equals(password);
     }
 

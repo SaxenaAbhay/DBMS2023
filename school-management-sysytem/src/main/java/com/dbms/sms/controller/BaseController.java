@@ -7,7 +7,7 @@ import com.dbms.sms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 abstract class BaseController {
     @Autowired
@@ -39,7 +39,7 @@ abstract class BaseController {
 //                model.addAttribute("userProfile", studentService.getByScholarId(currentUser));
 //            }
 
-            if (userRole.equals("faculty")) {
+            if (userRole.equals("teacher")) {
                 model.addAttribute("userProfile", facultyService.getTeacherByEmail(currentUser));
             }
         }

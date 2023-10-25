@@ -13,8 +13,8 @@ public class UserService {
     @Autowired
     private UserRepository users;
 
-    @Autowired
-    private TeacherRepository faculties;
+//    @Autowired
+//    private TeacherRepository teachers;
 
     public String getRole(String username) {
         User user = users.getUser(username);
@@ -22,13 +22,13 @@ public class UserService {
         if (user.getIsAdmin()) {
             return "admin";
         }
-
+//
 //        try {
-//            faculties.findByEmail(username);
+//            teachers.findByEmail(username);
 //            return "faculty";
 //        } catch (Exception e) {}
 
-        return "unknown";
+        return "teacher";
     }
 
     public void changePassword(String username, User user) {

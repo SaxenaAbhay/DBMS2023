@@ -1,13 +1,12 @@
 package com.dbms.sms.service.impl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Teacher;
@@ -55,10 +54,8 @@ public class TeacherServiceImpl implements TeacherService
 
 	@Override
 	public Teacher getTeacherByEmail(String email) {
-		 String sql = "SELECT * FROM faculty WHERE email = ?";
+		 String sql = "SELECT * FROM teachers WHERE email = \""+email+"\";";
 	       return template.queryForObject(sql, new BeanPropertyRowMapper<>(Teacher.class));
 	}
 	
-
-
 }
