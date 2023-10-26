@@ -23,13 +23,19 @@
 				<th>Class Id</th>
 				<th>Section</th>
 				<th>Standard</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="class: ${classes}">
-				<td th:text = "${class.classId}"></td>
-				<td th:text = "${class.section}"></td>
-				<td th:text = "${class.standard}"></td>
+			<tr th:each="classs: ${classes}">
+				<td th:text = "${classs.classId}"></td>
+				<td th:text = "${classs.section}"></td>
+				<td th:text = "${classs.standard}"></td>
+				<td>
+					<a th:href="@{/classes/edit/{classId}(classId=${classs.classId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/classes/{classId}(classId=${classs.classId})}" class="btn btn-danger">Delete</a>
+					
+				</td>
 			</tr>
 		</tbody>	
 		</table>

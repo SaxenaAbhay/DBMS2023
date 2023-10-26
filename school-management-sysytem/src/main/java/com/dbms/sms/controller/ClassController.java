@@ -42,4 +42,27 @@ public class ClassController {
 		return "redirect:/classes";
 	}
 
+		
+	@GetMapping("/classes/edit/{classId}")
+	public String editSExamForm(@PathVariable Long classId, Model model){
+		model.addAttribute("classs", classService.getClassById(classId));
+		return "edit_class";
+	}
+
+	@PostMapping("/classes/{classId}")
+	public String updateClass(@PathVariable Long classId, @ModelAttribute("classs") Class classs, Model model){
+		Class existingclass=classService.getClassById(classId);
+		existingclass.setClassId(classId);
+		existingclass.setSection(classs.getSection());
+		existingclass.setStandard(classs.getStandard());
+
+		classService.updateClass(existingclass);
+		return "redirect:/classes";
+	}
+
+	@GetMapping("/classes/{classId}")
+	public String deleteString(@PathVariable Long classId){
+		classService.deleteClassById(classId);
+		return "redirect:/classes";
+	}
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Class;
+import com.dbms.sms.entity.Exam;
 import com.dbms.sms.repository.ClassRepository;
+import com.dbms.sms.repository.ExamRepository;
 import com.dbms.sms.service.ClassService;
 
 @Service
@@ -32,6 +34,16 @@ public class ClassServiceImpl implements ClassService
 	@Override
 	public Class getClassById(Long classId) {
 		return classRepository.findById(classId).get();
+	}
+
+	@Override
+	public Class updateClass(Class classId) {
+		return classRepository.save(classId);
+	}
+
+	@Override
+	public void deleteClassById(Long classId){
+	       classRepository.deleteById(classId);
 	}
 
 }

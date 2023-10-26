@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Exam;
+import com.dbms.sms.entity.Student;
 import com.dbms.sms.repository.ExamRepository;
 import com.dbms.sms.service.ExamService;
 
@@ -29,5 +30,20 @@ public class ExamServiceImpl implements ExamService
 		return ExamRepository.save(Exam);
 	}
 
+	
+	@Override
+	public Exam getExamById(Long examId) {
+		return ExamRepository.findById(examId).get();
+	}
+
+	@Override
+	public Exam updateExam(Exam exam) {
+		return ExamRepository.save(exam);
+	}
+
+	@Override
+	public void deleteExamById(Long examId){
+	       ExamRepository.deleteById(examId);
+	}
 
 }

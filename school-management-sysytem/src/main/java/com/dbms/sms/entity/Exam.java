@@ -11,7 +11,7 @@ public class Exam {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="exam_id")
-	private int examId;
+	private Long examId;
 		
 	@Column(name="date")
 	private String date;
@@ -29,14 +29,7 @@ public class Exam {
 	private int totalMarks;
 	
 	
-	 public int getExamId() {
-		return examId;
-	}
-
-	public void setExamId(int examId) {
-		this.examId = examId;
-	}
-
+	
 	public String getDate() {
 		return date;
 	}
@@ -99,4 +92,14 @@ public class Exam {
 	@ManyToOne
 	@JoinColumn(name = "subject_id", referencedColumnName = "sub_id")
 	private Subject subId;
+
+
+
+	public Long getExamId() {
+		return examId;
+	}
+
+	public void setExamId(Long examId) {
+		this.examId = examId;
+	}
 }

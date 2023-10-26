@@ -27,6 +27,7 @@
 				<th>Total marks</th>
 				<th>Exam Type</th>
 				<th>Subject Id</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,6 +39,11 @@
 				<td th:text = "${exam.totalMarks}"></td>
 				<td th:text = "${exam.type}"></td>
 				<td th:text = "${exam.subId.subId}"></td>
+				<td>
+					<a th:href="@{/exams/edit/{examId}(examId=${exam.examId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/exams/{examId}(examId=${exam.examId})}" class="btn btn-danger">Delete</a>
+					
+				</td>
 			</tr>
 		</tbody>	
 		</table>

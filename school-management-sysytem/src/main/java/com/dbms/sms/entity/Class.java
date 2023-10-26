@@ -11,7 +11,7 @@ public class Class {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="class_id")
-	private int classId;
+	private Long classId;
 	
 	@Column(name="standard")
 	private int standard;
@@ -20,15 +20,7 @@ public class Class {
 	private char section;
 	
 	
-	public int getClassId() {
-		return classId;
-	}
-
-
-	public void setClassId(int classId) {
-		this.classId = classId;
-	}
-
+	
 
 	public int getStandard() {
 		return standard;
@@ -62,6 +54,18 @@ public class Class {
 
 	@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Student> studentList;
+
+
+
+
+	public Long getClassId() {
+		return classId;
+	}
+
+
+	public void setClassId(Long classId) {
+		this.classId = classId;
+	}
 }
 //class classId{
 //	

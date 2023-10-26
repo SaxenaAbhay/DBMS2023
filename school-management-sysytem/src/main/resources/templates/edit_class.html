@@ -8,7 +8,7 @@
 <body>
     <div class="wrapper">
         <div class="title">Create Class</div>
-        <form class="form" method="post" th:action="@{/classes}" th:object="${classs}">
+        <form class="form" method="post" th:action="@{/classes/{classId} (classId=${classs.classId})}" th:object="${classs}">
             <div class="inputfield">
                 <label>Standard</label>
                 <input name="standard" type="text"  class="input" required >
