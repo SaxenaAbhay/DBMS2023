@@ -23,15 +23,22 @@ public class HomeController {
         return "dashboard";
      }
     
+    @RequestMapping("/login")
+    public String logout(){
+       return "login";
+    }
+    
     @RequestMapping("/subjects")
     public String subjects(){
        return "subjects";
     }
     
-    @RequestMapping("/login")
-    public String logout(){
-       return "login";
+    @RequestMapping("/error")
+    public String error(){
+       return "error";
     }
+    
+    
      
      @RequestMapping("/terms")
      public String terms() {

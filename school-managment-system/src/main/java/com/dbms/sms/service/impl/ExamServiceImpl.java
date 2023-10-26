@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Exam;
+import com.dbms.sms.entity.Student;
 import com.dbms.sms.repository.ExamRepository;
 import com.dbms.sms.service.ExamService;
 
@@ -28,6 +29,8 @@ public class ExamServiceImpl implements ExamService
 	public Exam saveExam(Exam Exam) {
 		return ExamRepository.save(Exam);
 	}
+	
+	
 
 
 }

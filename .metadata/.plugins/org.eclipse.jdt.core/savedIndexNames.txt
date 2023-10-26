@@ -41,7 +41,6 @@ INDEX VERSION 1.134+C:\Users\Abhay\Desktop\school managment system\.metadata\.pl
 2687936234.index
 715035423.index
 3450398078.index
-1978114804.index
 134372020.index
 642209199.index
 77822789.index

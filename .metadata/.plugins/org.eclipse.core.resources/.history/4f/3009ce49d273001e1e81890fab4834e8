@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">Create Score</div>
+        <form class="form" method="post"  th:action="@{/scores/{id} (id=${score.id})}" th:object="${score}" >
+            <div class="inputfield">
+                <label>Score Id</label>
+                <input name="id" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Student Id</label>
+                <input name="student.scholarId" type="text"  class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Exam </label>
+                <input name="exam.examId" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <label>Marks</label>
+                <input name="marks" type="text" class="input" required >
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="SUBMIT" class="btn">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

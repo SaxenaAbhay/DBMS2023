@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.dbms.sms.entity.Exam;
@@ -39,5 +40,11 @@ public class ExamController {
 	public String saveexam(@ModelAttribute("exam") Exam exam){
 		examService.saveExam(exam);
 		return "redirect:/exams";
+	}
+	
+	@GetMapping("/scores/edit/{id}")
+	public String editscoreForm(@PathVariable Long examId, Model model){
+		model.addAttribute("exam", examService.getExamById(examId));
+		return "edit_exam";
 	}
 }

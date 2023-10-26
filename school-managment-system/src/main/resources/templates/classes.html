@@ -84,6 +84,11 @@
 				<td th:text = "${class.section}"></td>
 				<td th:text = "${class.standard}"></td>
 			</tr>
+			<td>
+					<a th:href="@{/classes/edit/{classId}(classId=${class.classId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/classes/{classId}(classId=${class.classId})}" class="btn btn-danger">Delete</a>
+					
+				</td>
 		</tbody>	
 		</table>
 		
