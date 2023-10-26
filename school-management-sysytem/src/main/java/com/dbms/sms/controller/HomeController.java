@@ -26,11 +26,11 @@ public class HomeController {
     @Autowired
     private StudentRepository studentRepository;
 
-//     @RequestMapping("/")
-//     public String home(){
-//        return "dashboard";
-//     }
-//     
+     @RequestMapping("/")
+     public String home(){
+        return "dashboard";
+     }
+     
      @RequestMapping("/terms")
      public String terms() {
          return "terms";

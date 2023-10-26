@@ -11,7 +11,7 @@ public class Exam {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="exam_id")
-	private int examId;
+	private  Long examId;
 		
 	@Column(name="date")
 	private String date;
@@ -29,12 +29,12 @@ public class Exam {
 	private int totalMarks;
 	
 	
-	 public int getExamId() {
+	 public Long getExamId() {
 		return examId;
 	}
 
-	public void setExamId(int examId) {
-		this.examId = examId;
+	public void setExamId(Long examId2) {
+		this.examId = examId2;
 	}
 
 	public String getDate() {

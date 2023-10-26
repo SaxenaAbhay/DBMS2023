@@ -31,6 +31,16 @@ public class Student {
 	@Column(name="parent_name")
 	private String parentName;
 	
+	private int session;
+	
+	public int getSession() {
+		return session;
+	}
+
+	public void setSession(int session) {
+		this.session = session;
+	}
+
 	public Long getScholarId() {
 		return scholarId;
 	}

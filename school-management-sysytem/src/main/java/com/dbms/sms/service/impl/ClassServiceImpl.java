@@ -34,4 +34,14 @@ public class ClassServiceImpl implements ClassService
 		return classRepository.findById(classId).get();
 	}
 
+	@Override
+	public Class updateClass(Class classId) {
+		return classRepository.save(classId);
+	}
+
+	@Override
+	public void deleteClassById(Long classId){
+	       classRepository.deleteById(classId);
+	}
+
 }

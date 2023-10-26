@@ -26,4 +26,5 @@ public class UserRepository {
         template.update(sql, user.getPassword(), user.getUsername());
     }
 }
+
 //"select * from assignment where username='"+username+"';";

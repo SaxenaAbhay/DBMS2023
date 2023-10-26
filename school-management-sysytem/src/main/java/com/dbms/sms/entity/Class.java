@@ -11,7 +11,7 @@ public class Class {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="class_id")
-	private int classId;
+	private Long classId;
 	
 	@Column(name="standard")
 	private int standard;
@@ -20,12 +20,12 @@ public class Class {
 	private char section;
 	
 	
-	public int getClassId() {
+	public Long getClassId() {
 		return classId;
 	}
 
 
-	public void setClassId(int classId) {
+	public void setClassId(Long classId) {
 		this.classId = classId;
 	}
 

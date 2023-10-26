@@ -28,6 +28,26 @@ public class Teacher {
 	@Column(name="contact")
 	private String contact;
 	
+	private String joiningDate;
+	
+	private String status;
+	
+	public String getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(String joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Long getEmployeeId() {
 		return employeeId;
 	}
@@ -95,7 +115,7 @@ public class Teacher {
 
 	@ManyToOne
 	@JoinColumn(name = "subject_id", referencedColumnName = "sub_id")
-	Subject subId;
+	private Subject subId;
 	
 	@Column(name="salary")
 	private int salary;

@@ -49,7 +49,7 @@ public class AuthenticationController {
         
 //        System.out.println(username);
 //        System.out.println(password);
-        String errorMessage;
+        String errorMessage=null;
 //        try {
             if (authenticationService.checkCredentials(username, password)) {
             	String currentUser = authenticationService.getCurrentUser(session);

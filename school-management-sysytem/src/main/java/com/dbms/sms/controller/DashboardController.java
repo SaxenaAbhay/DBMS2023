@@ -21,6 +21,7 @@ import com.dbms.sms.entity.Class;
 import com.dbms.sms.entity.Exam;
 import com.dbms.sms.entity.Score;
 import com.dbms.sms.entity.Student;
+import com.dbms.sms.entity.Subject;
 import com.dbms.sms.entity.Teacher;
 import com.dbms.sms.entity.User;
 import com.dbms.sms.repository.ClassRepository;
@@ -28,6 +29,7 @@ import com.dbms.sms.service.ClassService;
 import com.dbms.sms.service.ExamService;
 import com.dbms.sms.service.ScoreService;
 import com.dbms.sms.service.StudentService;
+import com.dbms.sms.service.SubjectService;
 import com.dbms.sms.service.TeacherService;
 import com.dbms.sms.service.ToastService;
 import com.dbms.sms.service.UserService;
@@ -52,6 +54,7 @@ public class DashboardController extends BaseController {
 	
 	@Autowired
 	private ScoreService scoreService;
+
 	
 	@Autowired
 	private ToastService toastService;
@@ -188,8 +191,9 @@ public class DashboardController extends BaseController {
 
 	// handler method to handle list Classs and return mode and view
 
+//	private ClassService classService;
 	@GetMapping("/classes")
-	public String listStudents(Model model,HttpSession session) {
+	public String listClasses(Model model,HttpSession session) {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
@@ -197,29 +201,56 @@ public class DashboardController extends BaseController {
 		return "classes";
 	}
 
+
 	@GetMapping("/classes/new")
-	public String createClassForm(Model model,HttpSession session) {
+	public String createClassForm(Model model,HttpSession session){
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		
-		addDefaultAttributes(model, session);
-		 String userRole = model.getAttribute("userRole").toString();
-	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-	            return "errorMsg";
-	        }
-		Class classs = new Class();
+		Class classs= new Class();
 		model.addAttribute("classes", classs);
 		return "create_class";
 	}
 
 	@PostMapping("/classes")
-	public String saveClass(@ModelAttribute("classs") Class classs,HttpSession session) {
+	public String saveClass(@ModelAttribute("classs") Class classs,HttpSession session){
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
 		classService.saveClass(classs);
+		return "redirect:/classes";
+	}
+
+		
+	@GetMapping("/classes/edit/{classId}")
+	public String editClassForm(@PathVariable Long classId, Model model,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		model.addAttribute("classs", classService.getClassById(classId));
+		return "edit_class";
+	}
+
+	@PostMapping("/classes/{classId}")
+	public String updateClass(@PathVariable Long classId, @ModelAttribute("classs") Class classs, Model model,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		Class existingclass=classService.getClassById(classId);
+		existingclass.setClassId(classId);
+		existingclass.setSection(classs.getSection());
+		existingclass.setStandard(classs.getStandard());
+
+		classService.updateClass(existingclass);
+		return "redirect:/classes";
+	}
+
+	@GetMapping("/classes/{classId}")
+	public String deleteClass(@PathVariable Long classId,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		classService.deleteClassById(classId);
 		return "redirect:/classes";
 	}
 
@@ -327,38 +358,72 @@ public class DashboardController extends BaseController {
 	//ExamController
 	
 
-	    @GetMapping("/exams")
-		public String listExams(Model model,HttpSession session) {
-	    	if (!isAuthenticated(session)) {
-	            return "redirect:/login";
-	        }
-			
-			model.addAttribute("exams", examService.getAllExams());
-			return "exams";
-		}
+	@GetMapping("/exams")
+	public String listExams(Model model,HttpSession session) {
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		model.addAttribute("exams", examService.getAllExams());
+		return "exams";
+	}
 
 
-		@GetMapping("/exams/new")
-		public String createexamForm(Model model,HttpSession session){
-			if (!isAuthenticated(session)) {
-	            return "redirect:/login";
-	        }
-			
-			Exam exam= new Exam();
-			model.addAttribute("exam", exam);
-			return "create_exam";
-		}
+	@GetMapping("/exams/new")
+	public String createexamForm(Model model,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		Exam exam= new Exam();
+		model.addAttribute("exam", exam);
+		return "create_exam";
+	}
 
-		@PostMapping("/exams")
-		public String saveexam(@ModelAttribute("exam") Exam exam,HttpSession session){
-			if (!isAuthenticated(session)) {
-	            return "redirect:/login";
-	        }
-			examService.saveExam(exam);
-			return "redirect:/exams";
-		}
+	@PostMapping("/exams")
+	public String saveexam(@ModelAttribute("exam") Exam exam,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		examService.saveExam(exam);
+		return "redirect:/exams";
+	}
+
+
 	
-		
+	@GetMapping("/exams/edit/{examId}")
+	public String editSExamForm(@PathVariable Long examId, Model model,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		model.addAttribute("exam", examService.getExamById(examId));
+		return "edit_exam";
+	}
+
+	@PostMapping("/exams/{examId}")
+	public String updateExam(@PathVariable Long examId, @ModelAttribute("exam") Exam exam, Model model,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		Exam existingexam=examService.getExamById(examId);
+		existingexam.setExamId(examId);
+		existingexam.setDate(exam.getDate());
+		existingexam.setSlot(exam.getSlot());
+		existingexam.setStandard(exam.getStandard());
+		existingexam.setTotalMarks(exam.getTotalMarks());
+		existingexam.setType(exam.getType());
+
+		examService.updateExam(existingexam);
+		return "redirect:/exams";
+	}
+
+	@GetMapping("/exams/{examId}")
+	public String deleteExam(@PathVariable Long examId,HttpSession session){
+		if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+		examService.deleteExamById(examId);
+		return "redirect:/exams";
+	}
+	
 		//Score Controller
 
 
@@ -431,7 +496,102 @@ public class DashboardController extends BaseController {
 				return "redirect:/scores";
 			}
 		
+	//Subject Controller
 			
+
+			@Autowired
+			private SubjectService subjectService;
+			
+			@GetMapping("/subjects")
+			public String listSubjects(Model model,HttpSession session) {
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				model.addAttribute("subjects", subjectService.getAllSubjects());
+				return "subjects";
+			}
+
+
+			@GetMapping("/subjects/new")
+			public String createsubjectForm(Model model,HttpSession session){
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				addDefaultAttributes(model, session);
+				 String userRole = model.getAttribute("userRole").toString();
+			        if (!userRole.equals("admin")) {
+//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+			            return "errorMsg";
+			        }
+				model.addAttribute("listClass", classRepository.findAll());
+				Subject subject= new Subject();
+				model.addAttribute("subject", subject);
+				return "create_subject";
+			}
+
+			@PostMapping("/subjects")
+			public String savesubject(@ModelAttribute("subject") Subject subject,Model model,HttpSession session){
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				addDefaultAttributes(model, session);
+				 String userRole = model.getAttribute("userRole").toString();
+			        if (!userRole.equals("admin")) {
+//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+			            return "errorMsg";
+			        }
+				subjectService.saveSubject(subject);
+				return "redirect:/subjects";
+			}
+
+			@GetMapping("/subjects/edit/{subId}")
+			public String editsubjectForm(@PathVariable Long subId, Model model,HttpSession session){
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				addDefaultAttributes(model, session);
+				 String userRole = model.getAttribute("userRole").toString();
+			        if (!userRole.equals("admin")) {
+//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+			            return "errorMsg";
+			        }
+				model.addAttribute("subject", subjectService.getSubjectById(subId));
+				return "edit_subject";
+			}
+
+			@PostMapping("/subjects/{subId}")
+			public String updatesubject(@PathVariable Long subId, @ModelAttribute("subject") Subject subject, Model model,HttpSession session){
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				addDefaultAttributes(model, session);
+				 String userRole = model.getAttribute("userRole").toString();
+			        if (!userRole.equals("admin")) {
+//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+			            return "errorMsg";
+			        }
+				Subject existingsubject=subjectService.getSubjectById(subId);
+				existingsubject.setSubId(subId);
+				existingsubject.setSub_name(subject.getSub_name());
+
+				subjectService.updateSubject(existingsubject);
+				return "redirect:/subjects";
+			}
+
+			@GetMapping("/subjects/{subId}")
+			public String deleteSubject(@PathVariable Long subId,HttpSession session,Model model){
+				if (!isAuthenticated(session)) {
+		            return "redirect:/login";
+		        }
+				addDefaultAttributes(model, session);
+				 String userRole = model.getAttribute("userRole").toString();
+			        if (!userRole.equals("admin")) {
+//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+			            return "errorMsg";
+			        }
+				subjectService.deleteSubjectById(subId);
+				return "redirect:/subjects";
+			}
 
     @GetMapping("/dashboard/changePassword")
     public String changePassword(Model model, HttpSession session) {

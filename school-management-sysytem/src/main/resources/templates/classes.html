@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
+<html lang="en">
 <head>
    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +62,7 @@
 			<caption style="caption-side:top">
 				<div class="col-lg-4">
 					<h2>List of Classes</h2>
-                <a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3">Add class</a>
+                <a th:href="@{/classes/new}" class="btn btn-primary btn-sm mb-3">Add class</a>
                 <div class = "search-container my-4">
 			<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search here..."/>
 			<div class = "search-result">
@@ -74,15 +74,20 @@
 		<thead class="table-dark">
 			<tr>
 				<th>Class Id</th>
-				<th>Section</th>
 				<th>Standard</th>
+				<th>Section</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="class: ${classes}">
 				<td th:text = "${class.classId}"></td>
-				<td th:text = "${class.section}"></td>
 				<td th:text = "${class.standard}"></td>
+				<td th:text = "${class.section}"></td>
+				<td>
+				<a th:href="@{/classes/edit/{classId}(classId=${class.classId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/classes/{classId}(classId=${class.classId})}" class="btn btn-danger">Delete</a>
+				</td>
 			</tr>
 		</tbody>	
 		</table>

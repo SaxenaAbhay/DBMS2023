@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::body})}">
+<html lang="en">
 <head>
    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
             <!-- Logo -->
-            <a class="navbar-brand logo-image" th:href="@{/dashboard}"><img src="./images/logo.jpg"></a><h3>MY ACADEMIA</h3>
+            <a class="navbar-brand logo-image" href="./index.html"><img src="./images/logo.jpg"></a><h3>MY ACADEMIA</h3>
             
             <!-- Mobile Menu Toggle Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" th:href="@{/dashboard}">HOME<span class="sr-only">(current)</span></a>
+                        <a class="nav-link page-scroll" th:href="@{/}">HOME<span class="sr-only">(current)</span></a>
                     </li>
                     
                 </ul>
@@ -80,6 +80,7 @@
 				<th>Total marks</th>
 				<th>Exam Type</th>
 				<th>Subject Id</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -87,10 +88,15 @@
 				<td th:text = "${exam.examId}"></td>
 				<td th:text = "${exam.date}"></td>
 				<td th:text = "${exam.slot}"></td>
-				<td th:text = "${exam.type}"></td>
 				<td th:text = "${exam.standard}"></td>
 				<td th:text = "${exam.totalMarks}"></td>
+				<td th:text = "${exam.type}"></td>
 				<td th:text = "${exam.subId.subId}"></td>
+				<td>
+					<a th:href="@{/exams/edit/{examId}(examId=${exam.examId})}" class="btn btn-primary">Update</a>
+					<a th:href="@{/exams/{examId}(examId=${exam.examId})}" class="btn btn-danger">Delete</a>
+					
+				</td>
 			</tr>
 		</tbody>	
 		</table>
