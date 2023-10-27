@@ -25,6 +25,8 @@ import com.dbms.sms.entity.Subject;
 import com.dbms.sms.entity.Teacher;
 import com.dbms.sms.entity.User;
 import com.dbms.sms.repository.ClassRepository;
+import com.dbms.sms.repository.UserRepository;
+import com.dbms.sms.service.AuthenticationService;
 import com.dbms.sms.service.ClassService;
 import com.dbms.sms.service.ExamService;
 import com.dbms.sms.service.ScoreService;
@@ -53,8 +55,13 @@ public class DashboardController extends BaseController {
 	private ClassRepository classRepository;
 	
 	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
 	private ScoreService scoreService;
-
+	
+	@Autowired
+	private AuthenticationService authenticationService;
 	
 	@Autowired
 	private ToastService toastService;
@@ -73,26 +80,51 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		return "dashboard";
 	}
+	
+	//Register
+	
+	@GetMapping("/register")
+    public String register(Model model, HttpSession session) {
+        if (!authenticationService.isAuthenticated(session)) {
+            return "redirect:/";
+        }
+        String currentUser = authenticationService.getCurrentUser(session);
+//        model.addAttribute("username", currentUser);
+        String userRole = userService.getRole(currentUser);
+        if (!userRole.equals("admin")) {
+//       	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+           return "teacher_dashboard";
+       }
+        model.addAttribute("credentials", new User());
+        return "register";
+    }
+    
+    @PostMapping("/register")
+    public String postRegister(@ModelAttribute User credentials, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+//        if (authenticationService.isAuthenticated(session)) {
+//            return "redirect:/";
+//        }
 
-	@PostMapping("/dashboard/studentUpdate")
-	public String studentUpdate(@ModelAttribute Student userProfile, Model model, HttpSession session,
-			RedirectAttributes attributes) {
-		if (!isAuthenticated(session)) {
-			return "redirect:/";
-		}
+        String username = credentials.getUsername();
+        
+        
+        String password = credentials.getPassword();
+        
+//        Boolean isAdmin= credentials.getIsAdmin();
+//         System.out.println(isAdmin);
+        String errorMessage=null;
+        try {
+            if (!authenticationService.checkCredentials(username, password)) {
+            	
+            }
 
-		addDefaultAttributes(model, session);
-
-		String userRole = model.getAttribute("userRole").toString();
-		if (!userRole.equals("student")) {
-			return "redirect:/";
-		}
-
-//        userProfile.setScholarId(model.getAttribute("username").toString());
-		studentService.updateStudent(userProfile);
-//        toastService.redirectWithSuccessToast(attributes, "Profile updated successfully.");
-		return "redirect:/dashboard";
-	}
+        }
+           catch(Exception e){
+//        	   authenticationService.registerUser(username,password,isAdmin);
+        	  userRepository.createUser(username,password);
+            }
+        return "dashboard";
+    }   
 	
 	
 	//Teacher Controller
@@ -116,7 +148,7 @@ public class DashboardController extends BaseController {
 		 addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+	        	attributes.addFlashAttribute("error_msg","You don't have the rights to access this.");
 	            return "errorMsg";
 	        }
 		Teacher teacher = new Teacher();
@@ -271,14 +303,14 @@ public class DashboardController extends BaseController {
 	}
 
 	@GetMapping("/students/new")
-	public String createStudentForm(Model model,HttpSession session) {
+	public String createStudentForm(Model model,HttpSession session,RedirectAttributes attributes) {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+	        	toastService.redirectWithErrorToast(attributes,"You don't have the acceess");
 	            return "errorMsg";
 	        }
 		model.addAttribute("listClass", classRepository.findAll());
@@ -288,14 +320,14 @@ public class DashboardController extends BaseController {
 	}
 
 	@PostMapping("/students")
-	public String saveStudent(@ModelAttribute("student") Student student,HttpSession session,Model model) {
+	public String saveStudent(@ModelAttribute("student") Student student,HttpSession session,Model model,RedirectAttributes attributes) {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
+	        	toastService.redirectWithErrorToast(attributes,"You don't have the access");
 	            return "errorMsg";
 	        }
 		studentService.saveStudent(student);
@@ -593,7 +625,7 @@ public class DashboardController extends BaseController {
 				return "redirect:/subjects";
 			}
 
-    @GetMapping("/dashboard/changePassword")
+    @GetMapping("/change_password")
     public String changePassword(Model model, HttpSession session) {
         if (!isAuthenticated(session)) {
             return "redirect:/";
@@ -601,10 +633,10 @@ public class DashboardController extends BaseController {
 
         addDefaultAttributes(model, session);
         model.addAttribute("userObj", new User());
-        return "dashboard/changePassword";
+        return "change_password";
     }
 
-    @PostMapping("/dashboard/changePassword")
+    @PostMapping("/post_change_password")
     public String postChangePassword(@ModelAttribute User userObj, Model model, HttpSession session, RedirectAttributes attributes) {
         if (!isAuthenticated(session)) {
             return "redirect:/";
@@ -613,6 +645,8 @@ public class DashboardController extends BaseController {
         addDefaultAttributes(model, session);
         userService.changePassword(model.getAttribute("username").toString(), userObj);
 //        toastService.redirectWithSuccessToast(attributes, "Password changed successfully.");
-        return "redirect:/dashboard/changePassword";
+//        return "login";
+          authenticationService.logoutUser(session);
+          return "redirect:/";
     }
 }

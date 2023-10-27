@@ -30,7 +30,7 @@ public class UserService {
 
         return "teacher";
     }
-
+	
     public void changePassword(String username, User user) {
         user.setUsername(username);
         users.update(user);

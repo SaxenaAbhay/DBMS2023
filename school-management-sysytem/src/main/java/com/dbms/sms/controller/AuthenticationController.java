@@ -28,9 +28,9 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
-//        if (authenticationService.isAuthenticated(session)) {
-//            return "redirect:/";
-//        }
+        if (authenticationService.isAuthenticated(session)) {
+            return "redirect:/";
+        }
 
         model.addAttribute("credentials", new User());
         return "login";
@@ -46,7 +46,7 @@ public class AuthenticationController {
         
         
         String password = credentials.getPassword();
-        
+//        
 //        System.out.println(username);
 //        System.out.println(password);
         String errorMessage=null;
@@ -55,18 +55,18 @@ public class AuthenticationController {
             	String currentUser = authenticationService.getCurrentUser(session);
             	model.addAttribute("username", currentUser);
                 authenticationService.loginUser(session, username);
-                String userRole = userService.getRole(currentUser);
-                model.addAttribute("userRole", userRole);
+                String userRole = userService.getRole(username);
+//                model.addAttribute("userRole", userRole);
        	        if (!userRole.equals("admin")) {
 //       	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
        	            return "teacher_dashboard";
        	        }
                 return "dashboard";
-            }
+//            }
 //            errorMessage = "Incorrect password.";
 //        } catch (Exception e) {
 //            errorMessage = "No user with this username found.";
-//        }
+        }
 
         model.addAttribute("credentials", credentials);
 //        toastService.displayErrorToast(model, errorMessage);
@@ -78,4 +78,13 @@ public class AuthenticationController {
         authenticationService.logoutUser(session);
         return "redirect:/login";
     }
+    
+//    @GetMapping("/change_password")
+//    public String changePassword(Model model, HttpSession session) {
+//        authenticationService.logoutUser(session);
+//        return "redirect:/login";
+//    }
+//    
+    
+     
 }

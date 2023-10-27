@@ -26,7 +26,13 @@ public class AuthenticationService {
     public void logoutUser(HttpSession session) {
         session.removeAttribute(SESSION_AUTH_KEY);
     }
-
+    
+    public void registerUser(String username,String password,Boolean isAdmin) {
+    	User newuser=new User();
+    	newuser.setUsername(username);
+    	newuser.setPassword(password);
+//    	newuser.setIsAdmin(isAdmin);
+    }
     public String getCurrentUser(HttpSession session) {
         try {
             return session.getAttribute(SESSION_AUTH_KEY).toString();

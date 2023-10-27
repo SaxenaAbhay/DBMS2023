@@ -12,18 +12,21 @@ public class UserRepository {
     private JdbcTemplate template;
 
     public void createUser(String username, String password) {
-        String sql = "INSERT INTO user (username, password, isAdmin) VALUES ("+username+","+password+",0);";
-        template.update(sql, username, password);
+        String sql = "INSERT INTO user (username, password, is_admin) VALUES (\""+username+"\",\""+password+"\",0);";
+        template.execute(sql);
     }
 
+    
     public User getUser(String username) {
         String sql = "SELECT * FROM user WHERE username =\""+username+"\"";
+      System.out.println(username);
+//      System.out.println(password);
         return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
     public void update(User user) {
-        String sql = "UPDATE user SET password ="+ user.getPassword()+"WHERE username ="+user.getUsername()+";";
-        template.update(sql, user.getPassword(), user.getUsername());
+        String sql = "UPDATE user SET password ='"+ user.getPassword()+"' WHERE username ='"+user.getUsername()+"';";
+        template.execute(sql);
     }
 }
 
