@@ -19,7 +19,6 @@ public class UserRepository {
     
     public User getUser(String username) {
         String sql = "SELECT * FROM user WHERE username =\""+username+"\"";
-      System.out.println(username);
 //      System.out.println(password);
         return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class));
     }

@@ -57,7 +57,15 @@
             </div>
         </nav>
 		
-		
+		 <!--//message-->
+        <div th:if="${session.message}">
+	<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert">
+	  <span th:text="${session.message.body}"></span>
+	</div>		
+	<th:block th:text="${@sessionService.removeMessageFromSession()}"></th:block>
+	</div>
+	<!--//message-->
+	
 	<div class="container">
 		<table class="table table-striped table-bordered" >
 			<caption style="caption-side:top">

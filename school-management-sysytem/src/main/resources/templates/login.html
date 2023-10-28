@@ -60,7 +60,19 @@
 			</ul>
 		</div>
 	</nav>
-
+	
+	
+	<!--//message-->
+        <div th:if="${session.message}">
+	<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert">
+	  <span th:text="${session.message.body}"></span>
+	</div>		
+	<th:block th:text="${@sessionService.removeMessageFromSession()}"></th:block>
+	</div>
+	
+	<!--//message-->
+	
+	
 	<div class="wrapper">
 		<div class="title">LOGIN</div>
 		<form class="user form" action="#" method="POST" th:action="@{/login}" th:object="${credentials}">

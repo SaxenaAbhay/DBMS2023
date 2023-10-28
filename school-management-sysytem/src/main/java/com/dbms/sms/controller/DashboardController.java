@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dbms.sms.entity.Class;
 import com.dbms.sms.entity.Exam;
+import com.dbms.sms.entity.Message;
 import com.dbms.sms.entity.Score;
 import com.dbms.sms.entity.Student;
 import com.dbms.sms.entity.Subject;
@@ -63,8 +64,6 @@ public class DashboardController extends BaseController {
 	@Autowired
 	private AuthenticationService authenticationService;
 	
-	@Autowired
-	private ToastService toastService;
 
 	// Needed to automatically convert String date in form to Date object.
 	@InitBinder
@@ -77,7 +76,12 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
 			return "redirect:/login";
 		}
+		
 		addDefaultAttributes(model, session);
+		 String userRole = model.getAttribute("userRole").toString();
+	        if (!userRole.equals("admin")) {
+	            return "teacher_dashboard";
+	        }
 		return "dashboard";
 	}
 	
@@ -117,13 +121,16 @@ public class DashboardController extends BaseController {
             if (!authenticationService.checkCredentials(username, password)) {
             	
             }
-
+            errorMessage="User already exists";
+            session.setAttribute("message", new Message(errorMessage, "danger"));
+            return "redirect:/register";
         }
            catch(Exception e){
-//        	   authenticationService.registerUser(username,password,isAdmin);
         	  userRepository.createUser(username,password);
+              session.setAttribute("message", new Message("Successfully Registered User", "success"));
+
             }
-        return "dashboard";
+        return "redirect:/";
     }   
 	
 	
@@ -148,8 +155,8 @@ public class DashboardController extends BaseController {
 		 addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-	        	attributes.addFlashAttribute("error_msg","You don't have the rights to access this.");
-	            return "errorMsg";
+	        	session.setAttribute("message", new Message("You don't have the right to add teacher details", "danger"));
+	            return "teachers";
 	        }
 		Teacher teacher = new Teacher();
 		model.addAttribute("teacher", teacher);
@@ -193,14 +200,18 @@ public class DashboardController extends BaseController {
 	            return "errorMsg";
 	        }
 	        
-		Teacher existingteacher = teacherService.getteacherById(employeeId);
-		existingteacher.setEmployeeId(employeeId);
-		existingteacher.setFirstname(teacher.getFirstname());
-		existingteacher.setLastname(teacher.getLastname());
-		existingteacher.setEmail(teacher.getEmail());
+	        Teacher existingteacher=teacherService.getteacherById(employeeId);
+	        existingteacher.setEmployeeId(employeeId);
+			existingteacher.setFirstname(teacher.getFirstname());
+			existingteacher.setLastname(teacher.getLastname());
+			existingteacher.setEmail(teacher.getEmail());
+			existingteacher.setSubId(teacher.getSubId());
+			existingteacher.setSalary(teacher.getSalary());
 
-		teacherService.updateteacher(existingteacher);
-		return "redirect:/teachers";
+	        
+			teacherService.updateteacher(existingteacher);
+			return "redirect:/teachers";
+
 	}
 
 	@GetMapping("/teachers/{employeeId}")
@@ -211,7 +222,6 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
 	            return "errorMsg";
 	        }
 		teacherService.deleteteacherById(employeeId);
@@ -229,6 +239,7 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
+		
 		model.addAttribute("classes", classService.getAllClasses());
 		return "classes";
 	}
@@ -239,6 +250,12 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
+		addDefaultAttributes(model, session);
+		 String userRole = model.getAttribute("userRole").toString();
+	        if (!userRole.equals("admin")) {
+	        	session.setAttribute("message", new Message("You don't have the right to add class details", "danger"));
+	            return "classes";
+	        }
 		Class classs= new Class();
 		model.addAttribute("classes", classs);
 		return "create_class";
@@ -259,6 +276,12 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
+		addDefaultAttributes(model, session);
+		 String userRole = model.getAttribute("userRole").toString();
+	        if (!userRole.equals("admin")) {
+	        	session.setAttribute("message", new Message("You don't have the right to update class details", "danger"));
+	            return "classes";
+	        }
 		model.addAttribute("classs", classService.getClassById(classId));
 		return "edit_class";
 	}
@@ -278,10 +301,16 @@ public class DashboardController extends BaseController {
 	}
 
 	@GetMapping("/classes/{classId}")
-	public String deleteClass(@PathVariable Long classId,HttpSession session){
+	public String deleteClass(@PathVariable Long classId,HttpSession session,Model model){
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
+		addDefaultAttributes(model, session);
+		 String userRole = model.getAttribute("userRole").toString();
+	        if (!userRole.equals("admin")) {
+	        	session.setAttribute("message", new Message("You don't have the right to delete class details", "danger"));
+	            return "redirect:/classes";
+	        }
 		classService.deleteClassById(classId);
 		return "redirect:/classes";
 	}
@@ -310,12 +339,13 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-	        	toastService.redirectWithErrorToast(attributes,"You don't have the acceess");
-	            return "errorMsg";
+	        	session.setAttribute("message",new Message("You don't have the right to add students.","danger"));
+	            return "redirect:/students";
 	        }
 		model.addAttribute("listClass", classRepository.findAll());
 		Student student = new Student();
 		model.addAttribute("student", student);
+		session.setAttribute("message",new Message("Student added!!","success"));
 		return "create_student";
 	}
 
@@ -324,12 +354,7 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		addDefaultAttributes(model, session);
-		 String userRole = model.getAttribute("userRole").toString();
-	        if (!userRole.equals("admin")) {
-	        	toastService.redirectWithErrorToast(attributes,"You don't have the access");
-	            return "errorMsg";
-	        }
+		
 		studentService.saveStudent(student);
 		return "redirect:/students";
 	}
@@ -342,8 +367,8 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-	            return "errorMsg";
+	        	session.setAttribute("message",new Message("You don't have the right to update student details","danger"));
+	            return "redirect:/students";
 	        }
 		model.addAttribute("student", studentService.getStudentById(scholarId));
 		return "edit_student";
@@ -357,8 +382,8 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-	            return "errorMsg";
+	        	session.setAttribute("message", new Message("You don't have the right to update student details", "danger"));
+	            return "redirect:/students";
 	        }
 		Student existingStudent = studentService.getStudentById(scholarId);
 		existingStudent.setScholarId(scholarId);
@@ -379,8 +404,8 @@ public class DashboardController extends BaseController {
 		addDefaultAttributes(model, session);
 		 String userRole = model.getAttribute("userRole").toString();
 	        if (!userRole.equals("admin")) {
-//	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-	            return "errorMsg";
+	        	session.setAttribute("message",new Message("You don't have the right to delete student details.","danger"));
+	            return "redirect:/students";
 	        }
 		studentService.deleteStudentById(scholarId);
 		return "redirect:/students";
@@ -552,8 +577,8 @@ public class DashboardController extends BaseController {
 				addDefaultAttributes(model, session);
 				 String userRole = model.getAttribute("userRole").toString();
 			        if (!userRole.equals("admin")) {
-//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-			            return "errorMsg";
+			        	session.setAttribute("message", new Message("You don't have the right to add subject details", "danger"));
+			            return "redirect:/subjects";
 			        }
 				model.addAttribute("listClass", classRepository.findAll());
 				Subject subject= new Subject();
@@ -584,8 +609,8 @@ public class DashboardController extends BaseController {
 				addDefaultAttributes(model, session);
 				 String userRole = model.getAttribute("userRole").toString();
 			        if (!userRole.equals("admin")) {
-//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-			            return "errorMsg";
+			        	session.setAttribute("message", new Message("You don't have the right to edit subject details", "danger"));
+			            return "redirect:/subjects";
 			        }
 				model.addAttribute("subject", subjectService.getSubjectById(subId));
 				return "edit_subject";
@@ -618,8 +643,8 @@ public class DashboardController extends BaseController {
 				addDefaultAttributes(model, session);
 				 String userRole = model.getAttribute("userRole").toString();
 			        if (!userRole.equals("admin")) {
-//			        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
-			            return "errorMsg";
+			        	session.setAttribute("message", new Message("You don't have the right to delete subject details", "danger"));
+			            return "redirect:/subjects";
 			        }
 				subjectService.deleteSubjectById(subId);
 				return "redirect:/subjects";

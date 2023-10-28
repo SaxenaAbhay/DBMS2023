@@ -1,5 +1,6 @@
 package com.dbms.sms.controller;
 
+import com.dbms.sms.entity.Message;
 import com.dbms.sms.entity.User;
 import com.dbms.sms.service.AuthenticationService;
 import com.dbms.sms.service.ToastService;
@@ -50,7 +51,7 @@ public class AuthenticationController {
 //        System.out.println(username);
 //        System.out.println(password);
         String errorMessage=null;
-//        try {
+        try {
             if (authenticationService.checkCredentials(username, password)) {
             	String currentUser = authenticationService.getCurrentUser(session);
             	model.addAttribute("username", currentUser);
@@ -58,16 +59,17 @@ public class AuthenticationController {
                 String userRole = userService.getRole(username);
 //                model.addAttribute("userRole", userRole);
        	        if (!userRole.equals("admin")) {
-//       	        	attributes.addFlashAttribute("errorMsg","You don't have the rights to access this.");
        	            return "teacher_dashboard";
        	        }
                 return "dashboard";
-//            }
-//            errorMessage = "Incorrect password.";
-//        } catch (Exception e) {
-//            errorMessage = "No user with this username found.";
+            }
+            errorMessage = "Incorrect password.";
+        } catch (Exception e) {
+            errorMessage = "No user with this username found";
         }
-
+        if(errorMessage!=null) {
+        	session.setAttribute("message",new Message(errorMessage, "danger"));
+        }
         model.addAttribute("credentials", credentials);
 //        toastService.displayErrorToast(model, errorMessage);
         return "/login";
