@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Score;
+import com.dbms.sms.entity.Student;
 import com.dbms.sms.repository.ScoreRepository;
 import com.dbms.sms.service.ScoreService;
 
@@ -42,6 +43,14 @@ public class ScoreServiceImpl implements ScoreService
 	@Override
 	public void deleteScoreById(Long id){
 		scoreRepository.deleteById(id);
+	}
+	@Override
+	public List<Score> getsearch(String s) {
+		if(s==null) return scoreRepository.findAll();
+		
+		Long id=Long.parseLong(s);
+
+		return scoreRepository.findByExamId(id);
 	}
 
 }

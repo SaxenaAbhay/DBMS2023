@@ -2,6 +2,9 @@ package com.dbms.sms.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.util.Streamable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -13,8 +16,10 @@ import com.dbms.sms.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService
 {	
+	@Autowired
 	private JdbcTemplate template;
 	
+	@Autowired
 	private StudentRepository studentRepository;
 	
 	public StudentServiceImpl(StudentRepository studentRepository) {
@@ -53,7 +58,13 @@ public class StudentServiceImpl implements StudentService
 		String sql = "SELECT * FROM student WHERE rollNo = ?";
         return template.queryForObject(sql, new BeanPropertyRowMapper<>(Student.class));
 	}
-	
-	
+	@Override
+	public List<Student> getsearch(String s) {
+		if(s==null) return studentRepository.findAll();
+		
+		Long id=Long.parseLong(s);
 
+		return studentRepository.findById(id).stream().toList();
+	}
+	
 }

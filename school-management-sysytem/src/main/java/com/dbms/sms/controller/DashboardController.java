@@ -2,6 +2,7 @@ package com.dbms.sms.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -143,7 +144,8 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		model.addAttribute("teachers", teacherService.getAllteachers());
+		List<Teacher> l=teacherService.getsearch(null);
+		model.addAttribute("l",l);
 		return "teachers";
 	}
 
@@ -239,8 +241,8 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		
-		model.addAttribute("classes", classService.getAllClasses());
+		List<Class> l=classService.getsearch("");
+		model.addAttribute("l",l);
 		return "classes";
 	}
 
@@ -327,7 +329,8 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		model.addAttribute("students", studentService.getAllStudents());
+		List<Student> l=studentService.getsearch(null);
+		model.addAttribute("l",l);
 		return "students";
 	}
 
@@ -420,7 +423,8 @@ public class DashboardController extends BaseController {
 		if (!isAuthenticated(session)) {
             return "redirect:/login";
         }
-		model.addAttribute("exams", examService.getAllExams());
+		List<Exam> l=examService.getsearch(null);
+		model.addAttribute("l",l);
 		return "exams";
 	}
 
@@ -495,7 +499,8 @@ public class DashboardController extends BaseController {
 		            return "redirect:/login";
 		        }
 
-				model.addAttribute("scores", scoreService.getAllScores());
+				List<Score> l=scoreService.getsearch(null);
+				model.addAttribute("l",l);
 				return "scores";
 			}
 

@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import com.dbms.sms.entity.Exam;
-
+import com.dbms.sms.entity.Score;
 import com.dbms.sms.repository.ExamRepository;
 import com.dbms.sms.service.ExamService;
 
@@ -45,7 +45,15 @@ public class ExamServiceImpl implements ExamService
 	public void deleteExamById(Long examId){
 		examRepository.deleteById(examId);
 	}
+	
+	@Override
+	public List<Exam> getsearch(String s) {
+		if(s==null) return examRepository.findAll();
+		
+		Long id=Long.parseLong(s);
 
+		return examRepository.findBySubjectId(id);
+	} 
 
 
 }

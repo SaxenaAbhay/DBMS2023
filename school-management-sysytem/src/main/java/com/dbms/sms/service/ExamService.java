@@ -16,6 +16,8 @@ public interface ExamService {
 
 	void deleteExamById(Long examId);
 
+	public List<Exam> getsearch(String s);
+
 //	Student getByScholarId(String currentUser);
 }
 

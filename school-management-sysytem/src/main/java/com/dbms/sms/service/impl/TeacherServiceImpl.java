@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Service;
 
+import com.dbms.sms.entity.Class;
+import com.dbms.sms.entity.Exam;
 import com.dbms.sms.entity.Teacher;
 import com.dbms.sms.repository.TeacherRepository;
 import com.dbms.sms.service.TeacherService;
@@ -57,5 +59,12 @@ public class TeacherServiceImpl implements TeacherService
 		 String sql = "SELECT * FROM teachers WHERE email = \""+email+"\";";
 	       return template.queryForObject(sql, new BeanPropertyRowMapper<>(Teacher.class));
 	}
-	
+	@Override
+	public List<Teacher> getsearch(String s) {
+		if(s==null) return teacherRepository.findAll();
+		
+		Long id=Long.parseLong(s);
+
+		return teacherRepository.findBySubjectId(id);
+	} 
 }

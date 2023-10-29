@@ -17,5 +17,7 @@ public interface ClassService {
 
 	void deleteClassById(Long classId);
 
+	public List<Class> getsearch(String s);
+
 
 }

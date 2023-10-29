@@ -16,6 +16,8 @@ public interface StudentService {
 	void deleteStudentById(Long scholarId);
 
 	Student getByScholarId(String currentUser);
+
+	public List<Student> getsearch(String s);
 }
 
 

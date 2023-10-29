@@ -16,6 +16,8 @@ public interface TeacherService {
 	void deleteteacherById(Long employeeId);
 	
 	Teacher getTeacherByEmail(String email);
+
+	public List<Teacher> getsearch(String s);
 }
 
 
